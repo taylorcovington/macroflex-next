@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation';
 import loadSession from "@/lib/load-session";
+import AppHeader from '@/components/AppHeader';
  
 async function AppLayout(
   props: React.PropsWithChildren
@@ -12,7 +13,9 @@ async function AppLayout(
   }
  
   return (
-    <div>
+    <div className="flex flex-col flex-1 space-y-4">
+      <AppHeader />
+ 
       {props.children}
     </div>
   );
