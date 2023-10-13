@@ -40,3 +40,24 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 http://localhost:54324/monitor
 http://localhost:54324/
 http://localhost:54323/project/default/auth/users
+
+
+# MIGRATIONS
+## Creating a new migration file
+`./node_modules/.bin/supabase migration new schema`
+
+## Resetting the local database
+After you make changes to the database schema, you want to reset the local database so that it picks up the new changes.
+
+To do so, you have two choices:
+
+1. Stop and restart the Supabase containers
+1. Run the reset command
+
+In most cases, the second way is faster. You can run the following command:
+
+`npm run supabase:db:reset`
+
+## Generate types
+
+`npm run typegen`
