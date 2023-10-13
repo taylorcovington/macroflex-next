@@ -1,9 +1,16 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Providers from '@/components/Providers'
+import AuthChangeListener from '@/components/AuthChangeListener';
+import UserSessionProvider from "@/components/UserSessionProvider";
+import loadSession from "@/lib/load-session";
+
 import './globals.css'
+import { use } from 'react'
 
 const inter = Inter({ subsets: ['latin'] })
+
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: 'Smart Blogging Assistant - Your powerful content assistant',
@@ -19,12 +26,18 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const session = use(loadSession());
+
   return (
     <html lang="en" className='dark'>
       <body className={`${inter.className} min-h-screen bg-background`}>
-        <Providers>
-          {children}
-        </Providers>
+        <AuthChangeListener session={session}>
+          <UserSessionProvider session={session}>
+            <Providers>
+              {children}
+            </Providers>
+          </UserSessionProvider>
+        </AuthChangeListener>
       </body>
     </html>
   )
